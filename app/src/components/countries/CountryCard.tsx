@@ -7,9 +7,7 @@ const CountryCard = (props: {country: countryResource}) => {
     const [countryAtom, setCountry] = useAtom(selectedCountry);
 
     const countrySet = () => {
-        console.log(props.country);
         setCountry(props.country);
-        console.log(countryAtom);
     }
 
     const {country} = props;

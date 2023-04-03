@@ -33,10 +33,12 @@ const Homepage = () => {
         if (!country) {
             setCountry(countriesData[0]);
         }
+
+        //sorts alphabetically
         countriesData.sort((a: countryResource, b: countryResource) => a.name.common.localeCompare(b.name.common));
 
         return (
-            <div className='grid grid-cols-4 py-2 bg-#fafafa'>
+            <div className={`grid grid-cols-4 py-2`}>
                 {countriesData.map((country, index) => (
                     <div key={index} className='py-6'>
                         <CountryCard country={country}/>
