@@ -39,11 +39,11 @@ const Homepage = () => {
 
         return (
             <div className={`grid grid-cols-4 py-2`}>
-                {countriesData.map((country, index) => (
-                    <div key={index} className='py-6'>
-                        <CountryCard country={country}/>
-                    </div>
-                ))}
+                    {countriesData.map((country, index) => (
+                        <div key={index} className='py-6'>
+                            <CountryCard country={country}/>
+                        </div>
+                    ))}
             </div>
         );
     }
