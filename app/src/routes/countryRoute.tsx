@@ -2,12 +2,13 @@ import { Route } from '@tanstack/react-router';
 import React from 'react';
 import rootRoute from './rootRoute';
 import Error from '../utilities/Error';
+import Country from "../components/country/Country";
 
 const countryRoute = new Route({
     getParentRoute: () => rootRoute,
     path: '/country',
     component: () => {
-        return <div className="text-dgsoftwhite">Country Page</div>;
+        return <Country />;
     },
     errorComponent: () => <Error />,
 });
