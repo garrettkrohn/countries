@@ -1,4 +1,4 @@
-interface countriesResource {
+export interface countryResource {
     name: {
         common: string;
         official: string;
@@ -29,7 +29,7 @@ interface countriesResource {
 
 }
 
-export async function getCountries(): Promise<countriesResource> {
+export async function getCountries(): Promise<countryResource[]> {
     const url ='https://restcountries.com/v3.1/all';
     return await fetch(url, {
         headers: {
@@ -38,7 +38,7 @@ export async function getCountries(): Promise<countriesResource> {
         method: 'GET',
     })
         .then(response => response.json())
-        .then((data: countriesResource) => {
+        .then((data: countryResource[]) => {
             console.log('Success:', data);
             return data;
         })
