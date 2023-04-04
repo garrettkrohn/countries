@@ -10,6 +10,7 @@ const Navbar = () => {
         <div className='flex border justify-evenly'>
             <Link to={routes.BASE} search={{}} params={{}}>Homepage</Link>
             <Link to={routes.COUNTRY} search={{}} params={{}}>Country Page</Link>
+            <Link to={routes.USER} search={{}} params={{}}>User Page</Link>
             {country ?
                 <img className='h-12' alt='flag could not load' src={country.flag} />
             : ''

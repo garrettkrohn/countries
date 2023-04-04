@@ -4,5 +4,7 @@ export const regions = [
 
 export const routes = {
     BASE: '/',
-    COUNTRY: '/country'
+    COUNTRY: '/country',
+    USER: '/user'
+
 }
