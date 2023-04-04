@@ -18,14 +18,11 @@ const Country = () => {
     return (
         <div>
             <div>
-                Your selected country is: {country.name.common}
+                Your selected country is: {country.name}
             </div>
-            <div>Continent: {country.continents}</div>
             <div>Region: {country.region}</div>
-            <div>Subregion: {country.subregion}</div>
             <div>Population: {formattedPopulation}</div>
-            <div>Local Time: {country.timezones}</div>
-            <img alt={country.flags.alt} src={country.flags.png} />
+            <img alt='flag could not load' src={country.flag} />
         </div>
 
 

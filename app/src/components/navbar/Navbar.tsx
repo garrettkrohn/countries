@@ -11,7 +11,7 @@ const Navbar = () => {
             <Link to={routes.BASE} search={{}} params={{}}>Homepage</Link>
             <Link to={routes.COUNTRY} search={{}} params={{}}>Country Page</Link>
             {country ?
-                <img className='h-12' alt={country.flags.alt} src={country.flags.png} />
+                <img className='h-12' alt='flag could not load' src={country.flag} />
             : ''
             }
         </div>

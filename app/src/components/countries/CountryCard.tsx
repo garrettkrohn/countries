@@ -14,9 +14,9 @@ const CountryCard = (props: {country: countryResource}) => {
     const formattedPopulation = country.population.toLocaleString("en-US");
     return (
         <div className='h-72 w-48 border bg-white'>
-            <img alt={country.flags.alt} src={country.flags.png} />
+            <img alt='flag cannot load' src={country.flag} />
             <div className='text-2xl'>
-                {country.name.common}
+                {country.name}
             </div>
             <div>Population: {formattedPopulation}</div>
             <div>Region: {country.region}</div>

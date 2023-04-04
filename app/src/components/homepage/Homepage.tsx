@@ -35,7 +35,7 @@ const Homepage = () => {
         }
 
         //sorts alphabetically
-        countriesData.sort((a: countryResource, b: countryResource) => a.name.common.localeCompare(b.name.common));
+        countriesData.sort((a: countryResource, b: countryResource) => a.name.localeCompare(b.name));
 
         return (
             <div className={`grid grid-cols-4 py-2`}>

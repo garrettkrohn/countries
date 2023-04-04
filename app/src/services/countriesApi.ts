@@ -1,36 +1,15 @@
 export interface countryResource {
-    name: {
-        common: string;
-        official: string;
-        NativeName: {}
-    },
-    currencies: {},
-    capital: string,
-    region: string,
-    subregion: string,
-    languages: {},
-    landlocked: boolean,
     area: number,
-    maps: {
-        googleMaps: string
-    },
+    capital: string,
+    countryId: number,
+    flag: string,
+    name: string,
     population: number,
-    timezones: [
-        string
-    ],
-    continents: [
-        string
-    ],
-    flags: {
-        png: string,
-        svg: string,
-        alt: string
-    }
-
+    region: string
 }
 
 export async function getCountries(): Promise<countryResource[]> {
-    const url ='https://restcountries.com/v3.1/all';
+    const url ='http://localhost:8000/api/countries';
     return await fetch(url, {
         headers: {
             'Content-Type': 'application/json',
