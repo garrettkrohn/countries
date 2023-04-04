@@ -24,6 +24,7 @@ const Country = () => {
             <div>Region: {country.region}</div>
             <div>Subregion: {country.subregion}</div>
             <div>Population: {formattedPopulation}</div>
+            <div>Local Time: {country.timezones}</div>
             <img alt={country.flags.alt} src={country.flags.png} />
         </div>
 
