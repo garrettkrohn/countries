@@ -1,6 +1,9 @@
-import { useMutation } from '@tanstack/react-query';
-import React, {useState} from 'react';
-import {createUser} from "../../services/userApi";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import React, {useEffect, useState} from 'react';
+import {createUser, getUsers} from "../../services/userApi";
+import {getCountries} from "../../services/countriesApi";
+import Loading from "../../utilities/Loading";
+import Error from "../../utilities/Error";
 
 const UserPage = () => {
     const [localColor, setLocalColor] = useState('000000');
@@ -24,24 +27,55 @@ const UserPage = () => {
         onSettled: () => console.log('complete'),
     });
 
-    return (
-        <div>
+    const {
+        isLoading: usersAreLoading,
+        error: usersError,
+        data: usersData,
+        refetch: usersRefetch
+    } = useQuery({
+        queryKey: [`users`],
+        queryFn: () => getUsers(),
+    });
+
+    useEffect(() => {
+        return () => {
+            usersRefetch()
+        };
+    }, [data]);
+
+
+    if (usersAreLoading)
+        return (
             <div>
-                Username:
+                <Loading />
             </div>
-            <div>Background Color: </div>
+        );
+
+    if (usersError) return <Error />;
+
+    if (usersData) {
+        return (
             <div>
-                <label>New Username: </label>
-                <input type='text' value={username} onChange={changeUsername}
-                ></input>
+                <div>
+                    <label>New Username: </label>
+                    <input type='text' value={username} onChange={changeUsername}
+                    ></input>
+                </div>
+                <div>
+                    <label>New Hex Color (only 6 characters): </label>
+                    <input type="text" value={localColor} onChange={changeColor}></input>
+                </div>
+                <button onClick={() => mutate()}>Submit new user</button>
+                {usersData.map((user, index) => (
+                    <div key={index}>
+                        <div>username: {user.username}</div>
+                        <div>color: {user.backgroundColor}</div>
+                    </div>
+                ))}
             </div>
-            <div>
-                <label>New Hex Color (only 6 characters): </label>
-                <input type="text" value={localColor} onChange={changeColor}></input>
-            </div>
-            <button onClick={() => mutate()}>Submit new user</button>
-        </div>
-    );
+        );
+    }
+
 };
 
 export default UserPage;
