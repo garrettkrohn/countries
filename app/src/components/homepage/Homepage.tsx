@@ -6,10 +6,17 @@ import Error from "../../utilities/Error";
 import CountryCard from "../countries/CountryCard";
 import {selectedCountry} from "../../services/Atoms";
 import { useAtom } from 'jotai';
+import {getUsers} from "../../services/userApi";
 
 const Homepage = () => {
 
     const [country, setCountry] = useAtom(selectedCountry);
+
+    //makes the call for the users, caches, and makes it available for the users page
+    useQuery({
+        queryKey: [`users`],
+        queryFn: () => getUsers(),
+    });
 
     const {
         isLoading: countriesAreLoading,
