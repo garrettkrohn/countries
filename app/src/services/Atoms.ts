@@ -5,7 +5,7 @@ import {userResource} from "./userApi";
 const defaultUser = {
     userId: 0,
     username: 'default',
-    backgroundColor: 'FF0000'
+    backgroundColor: '808080'
 }
 
 //@ts-ignore

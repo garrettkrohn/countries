@@ -10,6 +10,7 @@ import { useAtom } from 'jotai';
 const UserPage = () => {
     const [localColor, setLocalColor] = useState('FF0000');
     const [username, setUsername] = useState('');
+    const [user, setUser] = useAtom(selectedUser);
 
     const changeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocalColor(event.target.value);
@@ -68,13 +69,14 @@ const UserPage = () => {
                     <input type="text" value={localColor} onChange={changeColor}></input>
                 </div>
                 <button onClick={() => mutate()}>Submit new user</button>
+                <div>Selected User: {user.username}</div>
                 {usersData.map((user, index) => (
                     <div key={index} className='border'>
                         <div>username: {user.username}</div>
                         <div>color: {user.backgroundColor}</div>
+                        <button className='bg-red-700' onClick={() => setUser(user)}>Select User</button>
                     </div>
                 ))}
-                <div className={`bg-[#${localColor}]`} style={{height: 25, width: 25}}></div>
             </div>
         );
     }
