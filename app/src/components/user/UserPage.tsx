@@ -4,10 +4,13 @@ import {createUser, getUsers} from "../../services/userApi";
 import {getCountries} from "../../services/countriesApi";
 import Loading from "../../utilities/Loading";
 import Error from "../../utilities/Error";
+import {selectedCountry, selectedUser} from "../../services/Atoms";
+import { useAtom } from 'jotai';
 
 const UserPage = () => {
-    const [localColor, setLocalColor] = useState('000000');
+    const [localColor, setLocalColor] = useState('FF0000');
     const [username, setUsername] = useState('');
+    const [user, setUser] = useAtom(selectedUser);
 
     const changeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocalColor(event.target.value);
@@ -66,10 +69,12 @@ const UserPage = () => {
                     <input type="text" value={localColor} onChange={changeColor}></input>
                 </div>
                 <button onClick={() => mutate()}>Submit new user</button>
+                <div>Selected User: {user.username}</div>
                 {usersData.map((user, index) => (
-                    <div key={index}>
+                    <div key={index} className='border'>
                         <div>username: {user.username}</div>
                         <div>color: {user.backgroundColor}</div>
+                        <button className='bg-red-700' onClick={() => setUser(user)}>Select User</button>
                     </div>
                 ))}
             </div>
