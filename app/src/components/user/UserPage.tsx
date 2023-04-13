@@ -6,19 +6,20 @@ import Loading from "../../utilities/Loading";
 import Error from "../../utilities/Error";
 import {selectedCountry, selectedUser} from "../../services/Atoms";
 import { useAtom } from 'jotai';
+import { SliderPicker } from 'react-color';
 
 const UserPage = () => {
     const [localColor, setLocalColor] = useState('FF0000');
     const [username, setUsername] = useState('');
     const [user, setUser] = useAtom(selectedUser);
 
-    const changeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLocalColor(event.target.value);
-    }
-
     const changeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
     }
+
+    const handleBackgroundChangeComplete = (event: any) => {
+        setLocalColor(event.hex);
+    };
 
     const {data, mutate} = useMutation({
         mutationFn: () =>
@@ -64,16 +65,20 @@ const UserPage = () => {
                     <input type='text' value={username} onChange={changeUsername}
                     ></input>
                 </div>
-                <div>
-                    <label>New Hex Color (only 6 characters): </label>
-                    <input type="text" value={localColor} onChange={changeColor}></input>
-                </div>
-                <button onClick={() => mutate()}>Submit new user</button>
+                <SliderPicker
+                    color={localColor}
+                    onChangeComplete={handleBackgroundChangeComplete}
+                />
+                <div className='w-25 h-25' style={{backgroundColor: localColor}}>Preview</div>
+                <button className='bg-red-500' onClick={() => mutate()}>Submit new user</button>
                 <div>Selected User: {user.username}</div>
                 {usersData.map((user, index) => (
                     <div key={index} className='border'>
                         <div>username: {user.username}</div>
-                        <div>color: {user.backgroundColor}</div>
+                        <div className={'flex flex-row justify-center'}>
+                            <div>color: {user.backgroundColor}</div>
+                            <div className='w-4 h-4' style={{backgroundColor: user.backgroundColor}}></div>
+                        </div>
                         <button className='bg-red-700' onClick={() => setUser(user)}>Select User</button>
                     </div>
                 ))}

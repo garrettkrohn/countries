@@ -1,11 +1,12 @@
 import { Link } from '@tanstack/react-router';
 import { useAtom } from 'jotai';
 import React from 'react';
-import {selectedCountry} from "../../services/Atoms";
+import {selectedCountry, selectedUser} from "../../services/Atoms";
 import {routes} from "../../utilities/Constants";
 
 const Country = () => {
     const [country, setCountry] = useAtom(selectedCountry);
+    const [user] = useAtom(selectedUser);
 
     if (!country) {
         return (
@@ -16,7 +17,7 @@ const Country = () => {
     const formattedPopulation = country.population.toLocaleString("en-US");
 
     return (
-        <div>
+        <div style={{backgroundColor: user.backgroundColor}}>
             <div>
                 Your selected country is: {country.name}
             </div>

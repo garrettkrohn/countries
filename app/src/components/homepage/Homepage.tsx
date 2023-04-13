@@ -4,13 +4,14 @@ import {countryResource, getCountries} from "../../services/countriesApi";
 import Loading from "../../utilities/Loading";
 import Error from "../../utilities/Error";
 import CountryCard from "../countries/CountryCard";
-import {selectedCountry} from "../../services/Atoms";
+import {selectedCountry, selectedUser} from "../../services/Atoms";
 import { useAtom } from 'jotai';
 import {getUsers} from "../../services/userApi";
 
 const Homepage = () => {
 
     const [country, setCountry] = useAtom(selectedCountry);
+    const [user] = useAtom(selectedUser);
 
     //makes the call for the users, caches, and makes it available for the users page
     useQuery({
@@ -45,7 +46,7 @@ const Homepage = () => {
         countriesData.sort((a: countryResource, b: countryResource) => a.name.localeCompare(b.name));
 
         return (
-            <div className={`grid grid-cols-4 py-2`}>
+            <div className={`grid grid-cols-4 py-2`} style={{backgroundColor: user.backgroundColor}}>
                     {countriesData.map((country, index) => (
                         <div key={index} className='py-6'>
                             <CountryCard country={country}/>
