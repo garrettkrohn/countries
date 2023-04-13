@@ -5,6 +5,7 @@ use Doctrine\DBAL\Types\Types;
 
 class CountryDto
 {
+    // this class is the outgoing dto, it will define the object that will be returned to the front end
     private int $country_id;
 
     private string $name;

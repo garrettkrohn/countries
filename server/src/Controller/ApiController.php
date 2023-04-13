@@ -10,15 +10,13 @@ use JsonException;
 
 class ApiController extends AbstractController
 {
-    protected const BASE_URL = '/api';
-
     private SerializationService $serializationService;
 
     public function __construct(SerializationService $serializationService) {
         $this->serializationService = $serializationService;
     }
 
-    /**
+    /** provides the dto validation service used by all the controllers
      * @throws InvalidRequestDataException
      * @throws JsonException
      */

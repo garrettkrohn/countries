@@ -5,6 +5,8 @@ use Doctrine\DBAL\Types\Types;
 
 class CreateCountryDto
 {
+    //this class is used to validate the incoming dto when trying to create a country.  It is generally helpful to
+    //name these incoming dtos for the function that it is performing.
 
     private string $name;
 

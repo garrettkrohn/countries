@@ -23,7 +23,8 @@ class CountryService extends AbstractMultiTransformer
      * @param EntityManagerInterface $entityManager
      * @param CountryRepository $countryRepository
      */
-    public function __construct(RegionRepository $regionRepository, EntityManagerInterface $entityManager, CountryRepository $countryRepository)
+    public function __construct(RegionRepository $regionRepository, EntityManagerInterface $entityManager,
+                                CountryRepository $countryRepository)
     {
         $this->regionRepository = $regionRepository;
         $this->entityManager = $entityManager;
@@ -37,6 +38,7 @@ class CountryService extends AbstractMultiTransformer
      */
     public function addCountries(CreateCountryDto $createCountryDto): CountryDto
     {
+        //creates the country and converts the create country dto
         $country = new Country();
         $country->setName($createCountryDto->getName());
         $country->setFlag($createCountryDto->getFlag());
@@ -44,6 +46,9 @@ class CountryService extends AbstractMultiTransformer
         $country->setArea($createCountryDto->getArea());
         $country->setPopulation($createCountryDto->getPopulation());
 
+        //this is a great example of how doctrine can make nested objects easy to work with.  This portion of the
+        //function will check if there is a region with the name in the creat country dto.  If there is, it will
+        //simply add it to the country entity.  If one doesn't exist, it will create one then add it
         $regionSearch = $this->regionRepository->findOneBy(['name' => $createCountryDto->getRegion()]);
         if ($regionSearch) {
             $country->setRegion($regionSearch);
@@ -54,7 +59,10 @@ class CountryService extends AbstractMultiTransformer
             $this->entityManager->persist($newRegion);
         }
 
+        // the entity manager persist command stages the changed
         $this->entityManager->persist($country);
+        // the flush command adds it to the database.  You can do multiple persists and one flush when you're ready
+        // to send it to the database
         $this->entityManager->flush();
 
         return $this->transformFromObject($country);
@@ -69,7 +77,8 @@ class CountryService extends AbstractMultiTransformer
         return $this->transformFromObjects($allCountries);
     }
 
-    /**
+    /** Every controller that extends the AbstractMultiController needs this function which takes in the Country
+     * entity and returns a CountryDto.  This function will also be used by the transformFromObjects function.
      * @param Country $object
      * @return CountryDto
      */
