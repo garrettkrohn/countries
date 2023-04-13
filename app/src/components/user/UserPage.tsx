@@ -75,7 +75,10 @@ const UserPage = () => {
                 {usersData.map((user, index) => (
                     <div key={index} className='border'>
                         <div>username: {user.username}</div>
-                        <div>color: {user.backgroundColor}</div>
+                        <div className={'flex flex-row justify-center'}>
+                            <div>color: {user.backgroundColor}</div>
+                            <div className='w-4 h-4' style={{backgroundColor: user.backgroundColor}}></div>
+                        </div>
                         <button className='bg-red-700' onClick={() => setUser(user)}>Select User</button>
                     </div>
                 ))}
