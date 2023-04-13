@@ -22,15 +22,19 @@ class CountryController extends ApiController
         $this->countryService = $countryService;
     }
 
-    /**
+    /** the route command defines what the api call needs to be, so for this function it would be
+     * localhost:8000/api/countries as a POST request and the body will come in as a $request
      * @throws JsonException
      * @throws InvalidRequestDataException
      */
     #[Route('api/countries', methods: ('POST'))]
     public function setcountries(Request $request): Response
     {
+        // this block will define the type for $dto on line 35
         /** @var CreateCountryDto $dto */
+        // validates the dto against the class that you pass in as the second argument
         $dto = $this->getValidatedDto($request, CreateCountryDto::class);
+        // returns the object as a json.
         return $this->json($this->countryService->addCountries($dto));
     }
 

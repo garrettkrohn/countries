@@ -62,7 +62,7 @@ front end
 Backend Architecture
 
 (within the src folder)
-- controller hols all of the controllers.  
+- controller holds all of the controllers.  
   - ApiController should be extended by all of the specific controllers, it provides the validation logic
   - Controller has a health checker that is nice when checking if the container is up and running
   - Other specific controllers

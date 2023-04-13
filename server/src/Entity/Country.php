@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
 class Country
 {
+
+    // this class is generated with the Doctrine CLI, and it will define how the table is migrated to the database
+
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'SEQUENCE')]
     #[ORM\Column]
