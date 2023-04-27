@@ -6,7 +6,6 @@ use App\Entity\Country;
 use App\Entity\Region;
 use App\Repository\CountryRepository;
 use App\Repository\RegionRepository;
-use App\Service\AbstractMultiTransformer;
 use CountryDto;
 use CreateCountryDto;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,7 +22,7 @@ class CountryService extends AbstractMultiTransformer
      * @param EntityManagerInterface $entityManager
      * @param CountryRepository $countryRepository
      */
-    public function __construct(RegionRepository $regionRepository, EntityManagerInterface $entityManager,
+    public function __construct(RegionRepository  $regionRepository, EntityManagerInterface $entityManager,
                                 CountryRepository $countryRepository)
     {
         $this->regionRepository = $regionRepository;
@@ -68,15 +67,6 @@ class CountryService extends AbstractMultiTransformer
         return $this->transformFromObject($country);
     }
 
-    /**
-     * @return CountryDto[]
-     */
-    public function getAllcountries(): iterable
-    {
-        $allCountries = $this->countryRepository->findAll();
-        return $this->transformFromObjects($allCountries);
-    }
-
     /** Every controller that extends the AbstractMultiController needs this function which takes in the Country
      * entity and returns a CountryDto.  This function will also be used by the transformFromObjects function.
      * @param Country $object
@@ -94,5 +84,14 @@ class CountryService extends AbstractMultiTransformer
         $dto->setRegion($object->getRegion()->getName());
 
         return $dto;
+    }
+
+    /**
+     * @return CountryDto[]
+     */
+    public function getAllcountries(): iterable
+    {
+        $allCountries = $this->countryRepository->findAll();
+        return $this->transformFromObjects($allCountries);
     }
 }

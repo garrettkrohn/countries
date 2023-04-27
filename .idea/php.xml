@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="PhpCSFixer">
+    <phpcsfixer_settings>
+      <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/server/vendor/bin/php-cs-fixer" />
+    </phpcsfixer_settings>
+  </component>
   <component name="PhpCodeSniffer">
     <phpcs_settings>
       <PhpCSConfiguration tool_path="$PROJECT_DIR$/server/vendor/bin/phpcs" />
@@ -136,10 +141,17 @@
       <path value="$PROJECT_DIR$/server/vendor/nelmio/cors-bundle" />
       <path value="$PROJECT_DIR$/server/vendor/overtrue/phplint" />
       <path value="$PROJECT_DIR$/server/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/server/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/server/vendor/friendsofphp/php-cs-fixer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
+  <component name="PhpStan">
+    <PhpStan_settings>
+      <PhpStanConfiguration tool_path="$PROJECT_DIR$/server/vendor/bin/phpstan" />
+    </PhpStan_settings>
   </component>
   <component name="PhpUnit">
     <phpunit_settings>

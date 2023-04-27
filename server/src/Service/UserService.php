@@ -6,21 +6,25 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use CreateUserDto;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use UserDto;
 
 class UserService extends AbstractMultiTransformer
 {
     private EntityManagerInterface $entityManager;
     private UserRepository $userRepository;
+    private LoggerInterface $logger;
 
     /**
      * @param EntityManagerInterface $entityManager
      * @param UserRepository $userRepository
+     * @param LoggerInterface $logger
      */
-    public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository)
+    public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository, LoggerInterface $logger)
     {
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
+        $this->logger = $logger;
     }
 
 
@@ -34,16 +38,8 @@ class UserService extends AbstractMultiTransformer
 
         $createdUser = $this->userRepository->findOneBy(['username' => $createUserDto->getUsername()]);
 
-        return $this->transformFromObject($createdUser);
-    }
 
-    /**
-     * @return UserDto[]
-     */
-    public function getUsers(): iterable
-    {
-        $allUsers = $this->userRepository->findAll();
-        return $this->transformFromObjects($allUsers);
+        return $this->transformFromObject($createdUser);
     }
 
     /**
@@ -58,6 +54,15 @@ class UserService extends AbstractMultiTransformer
         $dto->setBackgroundColor($object->getBackgroundColor());
 
         return $dto;
+    }
+
+    /**
+     * @return UserDto[]
+     */
+    public function getUsers(): iterable
+    {
+        $allUsers = $this->userRepository->findAll();
+        return $this->transformFromObjects($allUsers);
     }
 
 
